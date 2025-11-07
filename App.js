@@ -7,23 +7,26 @@ import { CATEGORIES } from './data/dummy-data';
 export default function App() {
   return (
     <View style={styles.container}>
+      <StatusBar style="dark" />
       <ScrollView>
-        <StatusBar style="dark" />
-          <SafeAreaView style={{flex: 1}}>
-            {/* <View style={styles.category}></View> */}
-            {/* backgroundColor: "black", */}
-            {CATEGORIES.map((item, index) => (
-              <View key={index} style={[styles.category, {backgroundColor: item.color}]}>
-                <Text>{item.title}</Text>
-              </View>
-              ))}
-          </SafeAreaView>
+        <SafeAreaView style={{flex: 1}}>
+          {/* <View style={styles.category}></View> */}
+          {/* backgroundColor: "black", */}
+          {CATEGORIES.map((item, index) => (
+            <View key={index} style={[styles.category, {backgroundColor: item.color}]}>
+              <Text>{item.title}</Text>
+            </View>
+            ))}
+        </SafeAreaView>
       </ScrollView>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  screen: {
+    flex: 1
+  },
   container: {
     flex: 1,
     backgroundColor: '#fff',
