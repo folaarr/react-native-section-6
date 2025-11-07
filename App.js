@@ -14,7 +14,7 @@ export default function App() {
           {/* backgroundColor: "black", */}
           {CATEGORIES.map((item, index) => (
             <View key={index} style={[styles.category, {backgroundColor: item.color}]}>
-              <Text>{item.title}</Text>
+              <Text style={styles.title}>{item.title}</Text>
             </View>
             ))}
         </SafeAreaView>
@@ -37,8 +37,11 @@ const styles = StyleSheet.create({
     width: 75,
     height: 75,
     borderRadius: 15,
-    marginBottom: 30,
+    marginBottom: 10,
     alignItems: 'center',
     justifyContent: 'center',
+  }, 
+  title: {
+    textAlign: "center"
   }
 });
