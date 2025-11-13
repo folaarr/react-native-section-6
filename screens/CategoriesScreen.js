@@ -7,7 +7,7 @@ function CategoriesScreen({ navigation }) {
     function renderCategoryItem(itemData) {
         function pressHandler() {
             navigation.navigate("MealsOverview", {
-                categoryId: itemData.item.id
+                categoryId: itemData.item.id,
             });
         };
 
@@ -15,10 +15,10 @@ function CategoriesScreen({ navigation }) {
     };
     return (
         <FlatList 
-        data={CATEGORIES}
-        renderItem={itemData => renderCategoryItem(itemData)}
-        keyExtractor={(item, index) => item.id} 
-        numColumns={2} 
+            data={CATEGORIES}
+            renderItem={itemData => renderCategoryItem(itemData)}
+            keyExtractor={(item, index) => item.id} 
+            numColumns={2} 
         />
     );
 };
