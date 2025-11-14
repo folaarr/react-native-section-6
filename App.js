@@ -63,7 +63,7 @@ export default function App() {
 
             />
             <Stack.Screen 
-              title="" 
+              name="MealDetail" 
               component={MealDetailScreen} 
             />
           </Stack.Navigator>
