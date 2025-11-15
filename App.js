@@ -6,6 +6,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { useNavigation } from '@react-navigation/native';
 
 import CategoriesScreen from './screens/CategoriesScreen';
 import MealsOverviewScreen from './screens/MealsOverviewScreen';
@@ -42,6 +43,7 @@ export default function App() {
               headerStyle: {backgroundColor: "#e90"},
               headerTitleAlign: "center",
               headerTitleStyle: {fontFamily: "momo", fontSize: 22}, 
+              animation: "slide_from_right"
             }}
           >
             <Stack.Screen 
@@ -65,6 +67,10 @@ export default function App() {
             <Stack.Screen 
               name="MealDetail" 
               component={MealDetailScreen} 
+              options={{
+                
+                }
+              } 
             />
           </Stack.Navigator>
         </NavigationContainer>
@@ -75,5 +81,8 @@ export default function App() {
 const styles = StyleSheet.create({
     screen: {
         backgroundColor: "green"
+    }, 
+    header: {
+      color: "white"
     }
 });

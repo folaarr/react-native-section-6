@@ -1,16 +1,26 @@
-import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Image, ScrollView, Button } from 'react-native';
 import { useRoute } from '@react-navigation/native';
-import { use } from 'react';
+import { useLayoutEffect } from 'react';
+import { AntDesign, Entypo } from '@expo/vector-icons';
 
 import { MEALS } from '../data/dummy-data';
 import MealDetails from '../components/MealDetails';
 import Subtitle from '../components/MealDetail/Subtitle';
 import List from '../components/MealDetail/List';
+import IconButton from '../components/IconButton';
 
-export default function MealDetailScreen() {
+export default function MealDetailScreen({ navigation }) {
     const route = useRoute();
     const params = route.params;
     const selectedMeal = MEALS.find(item => item.id === params.mealId);
+
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            headerRight: () => {
+                return <IconButton icon={<Entypo name="star" size={24} color="white" />} />
+            }
+        });
+    }, [])
 
     return (
         <View>
