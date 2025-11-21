@@ -7,14 +7,44 @@ import { useEffect } from 'react';
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useNavigation } from '@react-navigation/native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import CategoriesScreen from './screens/CategoriesScreen';
 import MealsOverviewScreen from './screens/MealsOverviewScreen';
 import MealDetailScreen from './screens/MealDetailScreen';
+import FavoritesScreen from './screens/FavoritesScreen';
 
 SplashScreen.preventAutoHideAsync();
 
 const Stack = createNativeStackNavigator();
+
+const Drawer = createDrawerNavigator();
+
+function DrawerNavigator() {
+    return (
+      <Drawer.Navigator 
+        screenOptions={{
+          headerTitleAlign: "center",
+          headerStyle: {backgroundColor : "#e90"},
+          headerTintColor: "white",
+          sceneStyle: styles.screen,
+          drawerContentStyle: {backgroundColor: "green"},
+          drawerInactiveTintColor: "white",
+          drawerActiveTintColor: "green",
+          drawerActiveBackgroundColor: "lightgreen"
+        }}
+      >
+        <Drawer.Screen 
+          name="Categories" 
+          component={CategoriesScreen} 
+          options={{
+            title: "All categories"
+          }}
+        />
+        <Drawer.Screen name="Favorites" component={FavoritesScreen} />
+      </Drawer.Navigator>
+    );
+};
 
 export default function App() {
     const [loaded, error] = useFonts({
@@ -36,41 +66,34 @@ export default function App() {
       <StatusBar style="light" />
         <NavigationContainer>
           <Stack.Navigator 
-            initialRouteName="MealsCategories" 
+            initialRouteName="DrawerScreen" 
             screenOptions={{
               contentStyle: styles.screen,
               headerTintColor: "white",
               headerStyle: {backgroundColor: "#e90"},
               headerTitleAlign: "center",
               headerTitleStyle: {fontFamily: "momo", fontSize: 22}, 
-              animation: "slide_from_right"
+              animation: "slide_from_right",
             }}
           >
             <Stack.Screen 
-              name="MealsCategories" 
-              component={CategoriesScreen} 
+              name="DrawerScreen" 
+              component={DrawerNavigator} 
               options={{
-                title: "All Categories",
+                title: "All categories",
+                headerShown: false,
               }}
             />
             <Stack.Screen 
               name="MealsOverview" 
               component={MealsOverviewScreen} 
-              // options={({route, navigation}) => {
-              //   const catId = route.params.categoryId
-              //   return {
-              //     title: catId
-              //   }
-              // }}  
-
             />
             <Stack.Screen 
               name="MealDetail" 
               component={MealDetailScreen} 
               options={{
-                
-                }
-              } 
+                title: "About the Meal"
+              }} 
             />
           </Stack.Navigator>
         </NavigationContainer>
