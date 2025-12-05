@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, Image, ScrollView, Button } from 'react-native';
 import { useRoute } from '@react-navigation/native';
-import { useLayoutEffect } from 'react';
+import { useLayoutEffect, useContext } from 'react';
 import { AntDesign, Entypo } from '@expo/vector-icons';
 
 import { MEALS } from '../data/dummy-data';
@@ -8,19 +8,37 @@ import MealDetails from '../components/MealDetails';
 import Subtitle from '../components/MealDetail/Subtitle';
 import List from '../components/MealDetail/List';
 import IconButton from '../components/IconButton';
+import { FavoritesContext } from '../store/context/favorites-context';
 
 export default function MealDetailScreen({ navigation }) {
+    const favoriteMealsCtx = useContext(FavoritesContext);
+
     const route = useRoute();
-    const params = route.params;
-    const selectedMeal = MEALS.find(item => item.id === params.mealId);
+    const mealId = route.params.mealId;
+    const selectedMeal = MEALS.find(item => item.id === mealId);
+
+    const mealIsFavorite = favoriteMealsCtx.ids.includes(mealId); 
+
+    function changeFavoriteStatusHandler() {
+        if (mealIsFavorite) {
+            favoriteMealsCtx.removeFavorite(mealId);
+        } else {
+            favoriteMealsCtx.addFavorite(mealId);
+        };
+    };
 
     useLayoutEffect(() => {
         navigation.setOptions({
             headerRight: () => {
-                return <IconButton icon={<Entypo name="star" size={24} color="white" />} />
+                return (
+                    <IconButton 
+                        icon={mealIsFavorite ? <Entypo name="star" size={24} color="white" /> : <Entypo name="star-outlined" size={24} color="white" />} 
+                        onPress={changeFavoriteStatusHandler}    
+                    />
+                );
             }
         });
-    }, [])
+    }, [navigation, changeFavoriteStatusHandler])
 
     return (
         <View>

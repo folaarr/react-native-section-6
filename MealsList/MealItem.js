@@ -4,7 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 
 import { shadow } from "../styles/shadow";
 import { MEALS } from "../data/dummy-data";
-import MealDetails from "./MealDetails";
+import MealDetails from "../components/MealDetails";
 
 export default function MealItem({ 
     id,
